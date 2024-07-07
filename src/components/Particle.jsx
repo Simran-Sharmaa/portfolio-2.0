@@ -45,6 +45,10 @@ const Particle = () => {
             // init={particlesInit}
             particlesLoaded={particlesLoaded}
             options={{
+                fpsLimit: 60,
+                collions:{
+                  enable:false
+                },
                 fullScreen:{
                   enable:true,
                   zIndex:-1,
