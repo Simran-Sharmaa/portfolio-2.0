@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
+// import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
 import Loader from "./Loader";
-
+import { loadSlim } from "@tsparticles/slim";
 const Particle = () => {
     const [ init, setInit ] = useState(false);
     
-    const load = async (engine) => {
-      await loadFull(engine);
-      setInit(true);
-  }
-
     useEffect(() => {
-        initParticlesEngine(load)
-    }, []);
+      initParticlesEngine(async (engine) => {
+          // await loadFull(engine);
+          await loadSlim(engine);
+      }).then(() => {
+          setInit(true);
+      });
+  }, []);
   
     const particlesLoaded = (container) => {
       console.log(container);
